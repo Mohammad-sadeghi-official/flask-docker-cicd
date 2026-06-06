@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull latest image
+        run: |
+          docker pull ghcr.io/${{ github.repository }}:main
+
+      - name: Stop old container
+        run: |
+          docker stop flask-app || true
+          docker rm flask-app || true
+
+      - name: Start new container
+        run: |
+          docker run -d \
+            --name flask-app \
+            -p 5000:5000 \
+            ghcr.io/${{ github.repository }}:main
