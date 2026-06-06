@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Pull latest image
         run: |
-          docker pull ghcr.io/${{ github.repository }}:main
+          docker pull ghcr.io/mohammad-sadeghi-official/flask-docker-cicd:main
 
       - name: Stop old container
         run: |
@@ -26,4 +26,4 @@ jobs:
           docker run -d \
             --name flask-app \
             -p 5000:5000 \
-            ghcr.io/${{ github.repository }}:main
+            ghcr.io/mohammad-sadeghi-official/flask-docker-cicd:main
