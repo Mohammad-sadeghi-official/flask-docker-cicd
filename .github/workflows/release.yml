@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Login to GHCR
@@ -24,23 +24,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare image variables
+      - name: Prepare release variables
         run: |
-          SHORT_SHA=$(git rev-parse --short $GITHUB_SHA)
+          SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")
+          IMAGE_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
 
           echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
           echo "VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
       - name: Pull CI image
         run: |
-          docker pull ghcr.io/${{ github.repository }}:sha-${SHORT_SHA}
+          docker pull ghcr.io/${IMAGE_NAME}:sha-${SHORT_SHA}
 
-      - name: Create release tag
+      - name: Retag image as release
         run: |
           docker tag \
-            ghcr.io/${{ github.repository }}:sha-${SHORT_SHA} \
-            ghcr.io/${{ github.repository }}:${VERSION}
+            ghcr.io/${IMAGE_NAME}:sha-${SHORT_SHA} \
+            ghcr.io/${IMAGE_NAME}:${VERSION}
 
       - name: Push release image
         run: |
-          docker push ghcr.io/${{ github.repository }}:${VERSION}
+          docker push ghcr.io/${IMAGE_NAME}:${VERSION}
