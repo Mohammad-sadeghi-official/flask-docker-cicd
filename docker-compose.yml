@@ -1,7 +1,7 @@
 services:
 
   flask:
-    image: ghcr.io/mohammad-sadeghi-official/flask-docker-cicd:main
+    image: ghcr.io/mohammad-sadeghi-official/flask-docker-cicd:${APP_VERSION:-main}
     container_name: flask
     restart: unless-stopped
 
