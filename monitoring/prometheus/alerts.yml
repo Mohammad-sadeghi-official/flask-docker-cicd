@@ -1,0 +1,30 @@
+groups:
+  - name: flask-alerts
+
+    rules:
+      - alert: FlaskDown
+        expr: up{job="flask"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Flask service is down"
+          description: "Prometheus cannot scrape Flask metrics"
+
+      - alert: HighCPUUsage
+        expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is above 80%"
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is above 80%"
