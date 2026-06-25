@@ -11,6 +11,14 @@ import time
 
 app = Flask(__name__)
 
+
+from prometheus_flask_exporter import PrometheusMetrics
+
+app = Flask(__name__)
+
+metrics = PrometheusMetrics(app)
+
+
 # ==================================
 # Metrics
 # ==================================

@@ -1,2 +1,3 @@
 prometheus-client
+prometheus-flask-exporter
 flask==3.1.1
