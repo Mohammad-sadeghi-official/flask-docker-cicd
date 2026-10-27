@@ -49,30 +49,30 @@ Prometheus Metricstext---
 ## ▶️ How to Run
 
 ### 1. Clone the repository
-```bash
 git clone https://github.com/Mohammad-sadeghi-official/flask-docker-cicd.git
 cd flask-docker-cicd2. Start the servicesBashdocker compose up -d --build3. Access the application
 Application: http://localhost
 Health Check: http://localhost/health
 Metrics: http://localhost/metrics
+
 🔄 CI/CD PipelineOn every push to main:
 Checkout the code
 Login to GitHub Container Registry
 Build the Docker image
 Push the image to ghcr.io/mohammad-sadeghi-official/flask-docker-cicd
+
 📊 Metrics Exposed
 http_requests_total
 http_request_duration_seconds
 active_requests
+
 📌 Future Improvements
  Add Grafana dashboard
  Implement proper deployment workflow
  Add unit tests
+ 
+ 👤 Author : Mohammad Sadeghi
+Junior DevOps Engineer
  Support multi-stage Docker build
  Add HTTPS with Let's Encrypt
  
-👤 Author : Mohammad Sadeghi
-Junior DevOps Engineer
-
-
-Juni
