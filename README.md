@@ -1,3 +1,4 @@
+
 # Flask + Docker + CI/CD
 
 A complete practice project for containerizing a Flask application with **Nginx**, **Prometheus metrics**, and a full **GitHub Actions CI/CD pipeline**.
@@ -16,9 +17,15 @@ A complete practice project for containerizing a Flask application with **Nginx*
 
 ---
 
-## 🏗️ ArchitectureClient → Nginx (port 80) → Flask (port 5000)
-↓
-Prometheus Metricstext---
+## 🏗️ Architecture
+
+```
+Client → Nginx (port 80) → Flask (port 5000)
+                              ↓
+                         Prometheus Metrics
+```
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -27,11 +34,14 @@ Prometheus Metricstext---
 - **Containerization:** Docker + Docker Compose
 - **CI/CD:** GitHub Actions
 - **Registry:** GitHub Container Registry (GHCR)
-- **Monitoring:** Prometheus , Grafana
+- **Monitoring:** Prometheus
 
 ---
 
-## 📦 Project Structureflask-docker-cicd/
+## 📦 Project Structure
+
+```
+flask-docker-cicd/
 ├── flask/
 │   ├── app.py
 │   ├── Dockerfile
@@ -44,35 +54,64 @@ Prometheus Metricstext---
 │   ├── ci.yml
 │   ├── deploy.yml
 │   └── release.yml
-└── docker-compose.ymltext---
+└── docker-compose.yml
+```
+
+---
 
 ## ▶️ How to Run
 
 ### 1. Clone the repository
+```bash
 git clone https://github.com/Mohammad-sadeghi-official/flask-docker-cicd.git
-cd flask-docker-cicd2. Start the servicesBashdocker compose up -d --build3. Access the application
-Application: http://localhost
-Health Check: http://localhost/health
-Metrics: http://localhost/metrics
+cd flask-docker-cicd
+```
 
-🔄 CI/CD PipelineOn every push to main:
-Checkout the code
-Login to GitHub Container Registry
-Build the Docker image
-Push the image to ghcr.io/mohammad-sadeghi-official/flask-docker-cicd
+### 2. Start the services
+```bash
+docker compose up -d --build
+```
 
-📊 Metrics Exposed
-http_requests_total
-http_request_duration_seconds
-active_requests
+### 3. Access the application
+- Application: [http://localhost](http://localhost)
+- Health Check: [http://localhost/health](http://localhost/health)
+- Metrics: [http://localhost/metrics](http://localhost/metrics)
 
-📌 Future Improvements
- Add Grafana dashboard
- Implement proper deployment workflow
- Add unit tests
- 
- 👤 Author : Mohammad Sadeghi
-Junior DevOps Engineer
- Support multi-stage Docker build
- Add HTTPS with Let's Encrypt
- 
+---
+
+## 🔄 CI/CD Pipeline
+
+On every push to `main`:
+
+1. Checkout the code
+2. Login to GitHub Container Registry
+3. Build the Docker image
+4. Push the image to `ghcr.io/mohammad-sadeghi-official/flask-docker-cicd`
+
+---
+
+## 📊 Metrics Exposed
+
+- `http_requests_total`
+- `http_request_duration_seconds`
+- `active_requests`
+
+---
+
+## 📌 Future Improvements
+
+- [ ] Add Grafana dashboard
+- [ ] Implement proper deployment workflow
+- [ ] Add unit tests
+- [ ] Support multi-stage Docker build
+- [ ] Add HTTPS with Let's Encrypt
+
+---
+
+## 👤 Author
+
+**Mohammad Sadeghi**  
+Junior DevOps Engineer  
+
+[LinkedIn](https://www.linkedin.com/in/mohammad-sadeghi1998)
+```
