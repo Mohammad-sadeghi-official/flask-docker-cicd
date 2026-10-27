@@ -75,7 +75,4 @@ active_requests
 Junior DevOps Engineer
 
 
-
-👤 AuthorMohammad Sadeghi
-
-Junior DevOps Engineer
+Juni
